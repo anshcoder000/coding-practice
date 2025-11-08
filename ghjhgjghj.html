@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+    </style>
+</head>
+<body>
+  <input>
+  <button onclick="add()">Add!!!</button>
+  <button onclick="get()">get!!!</button>
+  <button onclick="del()">delete!!!</button>
+<script>
+        function add() {
+            let n = document.getElementById('n').value;
+            let oldfriut = JSON.parse(localStorage.getItem('friuts') || '[]');
+            oldfriut.push(n);
+            let nn = JSON.stringify(oldfriut);
+            let x = localStorage.setItem('friuts', nn);
+            let nnn = document.getElementById('n').value = '';
+        }
+        function get() {
+            let n = localStorage.getItem('friuts') || '[]';
+            let old = JSON.parse(n)
+            let html = '';
+            old.map((f, index) => {
+                html += `<li>${f}<button style='background-color:red;' onclick='Delete(${index})'>DELETE</button></li>`
+              })
+            let li = document.getElementById("list");
+            li.innerHTML = html
+          }
+          function Delete(index) {
+            let n = localStorage.getItem('friuts') || '[]';
+            let lol = JSON.parse(n)
+            let o = lol.filter((friuts, dxt) => {
+                return index !== dxt
+            })
+            let fer = JSON.stringify(o)
+            let free = localStorage.setItem('friuts', fer);
+            let html = '';
+            o.map((f, index) => {
+                html += `<li>${f}<button style='background-color:red;' onclick='Delete(${index})'>DELETE</button></li>`
+            })
+            let li = document.getElementById("list");
+            li.innerHTML = html
+          }
+        function del() {
+            let n = localStorage.removeItem('friuts');
+          }
+        function edit() {
+          let lol = localStorage.getItem('friuts')
+        }
+</script>
+</body>
+</html>

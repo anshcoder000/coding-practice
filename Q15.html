@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="n">
+    <button onclick="myfunc()">CLICK ME!
+
+    </button>
+    <ul id="list"></ul>
+    <script>
+        let names = []
+        function myfunc() {
+            let n = document.getElementById("n").value;
+            let lol = document.getElementById("list");
+            if (!n || n == '') {
+
+              alert('khali dala hai')
+                return 
+            }
+            names.push(n)
+
+            
+            let html = '';
+            names.map((n) => {
+                html += `<li>${n}</li>`
+            })
+            lol.innerHTML = html;
+            document.getElementById("n").value = "";
+         
+
+
+        }
+    </script>
+</body>
+
+</html>

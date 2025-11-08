@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .df {
+            display: flex;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div>
+
+        <div class="d-flex  justify-content-start gap-5">
+            <div class="">
+                <label for="exampleFormControlInput1" class="form-label"></label>
+                <input id="n" type="email" class="form-control border-success" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class=" justify-content-between ">
+
+                <div class="d-flex align-center] mt-4 gap-1">
+                    <button class="form-control border-success " class="bg-danger" onclick="add()">
+                    Add!!!
+                </button>
+                    <br>
+                    <button class="form-control border-success" class="bg-danger" onclick="get()">
+                    Get!!
+
+                </button>
+
+                    <button class="form-control border-success H-10 W-10 " class="bg-danger" onclick="del()">
+                    delete
+
+                </button>
+
+                </div>
+            </div>
+        </div>
+        <table class="table" id="list">
+
+        </table>
+        <div class="bg-danger H-100 pt-100"></div>
+        <div>
+        </div>
+    </div>
+
+    <script>
+        function add() {
+            let n = document.getElementById('n').value;
+            let oldfriut = JSON.parse(localStorage.getItem('friuts') || '[]');
+            oldfriut.push(n);
+            let nn = JSON.stringify(oldfriut);
+            let x = localStorage.setItem('friuts', nn);
+            let nnn = document.getElementById('n').value = '';
+        }
+
+        function get() {
+            let n = localStorage.getItem('friuts') || '[]';
+            let old = JSON.parse(n)
+            let html = '';
+
+            old.map((f, index) => {
+                html += `<tbody><tr>
+                    <td id="list">${f}</th>
+                    <td id="list"><button class='btn btn-succ'  onclick='Delete(${index})'>DELETE</button></th>
+                </tr></tbody>`
+            })
+            let li = document.getElementById("list");
+            li.innerHTML = html
+        }
+
+        function Delete(index) {
+            let n = localStorage.getItem('friuts') || '[]';
+            let lol = JSON.parse(n)
+            let o = lol.filter((friuts, dxt) => {
+                return index !== dxt
+            })
+            let fer = JSON.stringify(o)
+            let free = localStorage.setItem('friuts', fer);
+            let html = `<tr>
+                    no data found.
+                </tr>`;
+            o.map((f, index) => {
+                // html += `<td>${f}<button style='background-color:red;' onclick='Delete(${index})'>DELETE</button></td>`
+                html += `<tbody><tr>
+                    <td id="list">${f}</th>
+                    <td id="list"><button class='btn' style='background-color:red;' onclick='Delete(${index})'>DELETE</button></th>
+                </tr></tbody>`
+            })
+            let li = document.getElementById("list");
+            li.innerHTML = html
+        }
+
+        function del() {
+            let n = localStorage.removeItem('friuts');
+        }
+
+        function edit() {
+            let lol = localStorage.getItem('friuts')
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>right angle  **</title>
+</head>
+<body>
+    <input id="n" type="number">
+    <button onclick="handle()" type="button">Click me!</button>
+    <p id="Ans"></p>
+    <script>
+function handle() {
+    let star="";
+    let As=document.getElementById('n').value;
+    for(let i = 1; i <= As; i++) {
+        for(let j = 1; j <= i; j++) {
+            star+='*'
+        }
+             document.getElementById("Ans").innerText=star;
+             star+='\n'
+    }
+} 
+  
+         
+    </script>
+</body>
+</html>

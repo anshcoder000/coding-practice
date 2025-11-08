@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="n">
+    <button onclick="set()">Add!
+
+    </button>
+    <button onclick="get()">Get!
+
+    </button>
+    <ul id="ul"></ul>
+    <script>
+        // const fruits = [];
+        function set() {
+            let n = document.getElementById("n").value;
+            let oldfruits = JSON.parse(localStorage.getItem('friuts') || '[]') ;
+            oldfruits.push(n)
+    const oldfriutstr = JSON.stringify(oldfruits);
+            localStorage.setItem('friuts',oldfriutstr)
+            document.getElementById("n").value = '';
+        }
+        function get() {
+            let fruitstr = localStorage.getItem('friuts') || '[]';
+
+            const fruits = JSON.parse(fruitstr)
+
+            let html = '';
+            fruits.map((f)=>{
+               html +=  `<li>${f}</li>`
+            })
+
+            let ul = document.getElementById("ul");
+
+            ul.innerHTML = html;
+
+        }
+    </script>
+</body>
+
+</html>

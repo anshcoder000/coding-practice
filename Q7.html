@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oppsite triangle **</title>
+</head>
+<body>
+    <input id="n">
+    <button onclick="func()">CLICK ME!
+
+    </button>
+    <p id="Ans"></p>
+    <script>
+       function func() {
+let star='';
+let As=document.getElementById("n").value;
+   for(let i = As; i >= 1; i--) {
+        for(let j = 1; j <= i; j++) {
+            star+='*'
+       }
+           document.getElementById("Ans").innerText=star;
+      star+='\n'
+    }
+
+}
+    </script>
+</body>
+</html>
