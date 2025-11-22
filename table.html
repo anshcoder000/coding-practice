@@ -2,109 +2,98 @@
 <html lang="en">
 
 <head>
-    <style>
-        button {
-            height: 40px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+    <style>
+        .co {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container bg-light p-4 w-sm-60">
-        <div class="d-flex gap-4">
-            <div class="input-group mb-3">
+    <input id="n">
+    <button class="bg-primary" onclick="add()">Add</button>
+    <button class="bg-danger" onclick="deleAll()">delete</button>
+    <table class="table">
+        <thead>
+            <tr class="bg-dark">
+                <th class="c-light bg-dark co" scope="col">#</th>
+                <th class="c-light bg-dark co" scope="col">First</th>
+                <th class="c-light bg-dark co" scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody id="table">
 
-                <input id="n" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <button onclick="Add()" type="button" class="btn btn-primary btn-sm d-flex justify-content-center alighn-items-center"><svg class="d-sm-none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-</svg><span class="d-none d-sm-block">add!!!</span></button>
-            <button onclick="Get()" type="button" class="btn btn-warning btn-sm d-flex justify-content-center alighn-items-center"><svg class="d-sm-none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bullseye" viewBox="0 0 16 16">
-  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-  <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10m0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
-  <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/>
-  <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-</svg><span class="d-none d-sm-block">get!!!</span></button>
-            <button onclick="Delete()" type="button" class="btn btn-danger btn-sm d-flex justify-content-center alighn-items-center"><svg class="d-sm-none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-</svg><span class="d-none d-sm-block">delete!!!</span></button>
-            <hr>
-            <br>
-        </div>
-        <table id="table" class="table table- table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">S.no</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Action</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td> <button onclick="Delete()" type="button" class="btn btn-danger btn-sm ">Delete!!!</button></td>
-
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td><button onclick="Delete()" type="button" class="btn btn-danger btn-sm ">Delete!!!</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>John</td>
-                    <td><button onclick="Delete()" type="button" class="btn btn-danger btn-sm">Delete!!!</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
     <script>
-        function Add() {
-            let n = document.getElementById('n').value;
-            let oldfriurt = JSON.parse(localStorage.getItem('friuts') || '[]')
-            oldfriurt.push(n);
-            let jfnjin = JSON.stringify(oldfriurt)
-            let df = localStorage.setItem('friuts', jfnjin)
-            let ng = document.getElementById('n').value = '';
+        get()
+
+        function add() {
+            let n = document.getElementById("n").value;
+            if (!n) {
+                alert("the input is empty")
+                return
+            }
+            let oldtask = JSON.parse(localStorage.getItem('friut') || '[]')
+            oldtask.push(n)
+            let xx = JSON.stringify(oldtask);
+            let bb = localStorage.setItem('friut', xx)
+            let nn = document.getElementById("n").value = '';
+            get()
         }
 
-        function Get() {
-            let hh = localStorage.getItem('friuts') || '[]';
-            let hdfbhf = JSON.parse(hh);
+        function get() {
+            let ansh = localStorage.getItem('friut') || '[]';
+            let nn = JSON.parse(ansh);
             let html = '';
-            hdfbhf.map((f, index) => {
-                html += `<td>${f}<button onclick='Delete(${index})'>Delete!!!</button><td>`
+            nn.map((taskname, index) => {
+                html += `<tr><td>${index+1}</td><td>${taskname}</td><td><button onclick="del(${index})">delete</button></td></tr>`
             })
-            let table = document.getElementById('table');
-            table.innerHTML = html + `<br>`;
+            let xx = JSON.stringify(nn);
+            let table = document.getElementById("table");
+            table.innerHTML = html;
         }
 
-        function Delete(index) {
-            let del = localStorage.getItem('friuts') || '[]';
-            let ff = JSON.parse(del)
-            let sdf = ff.filter((friuts, dxt) => {
-                index !== dxt
-            })
-            let sdg = JSON.stringify(ff)
-            let sdffg = localStorage.setItem('friuts', sdg)
+        function deleAll() {
+            localStorage.removeItem('friut')
+            let ansh = localStorage.getItem('friut') || '[]';
+            let nn = JSON.parse(ansh);
             let html = '';
-            sdf.map((f, index) => {
-                html += `<td>${f}<button onclick='Delete(${index})'>Delete!!!</button><td>`
+            nn.map((taskname, index) => {
+                html += `<tr><td>${index+1}</td><td>${taskname}</td><td><button onclick="del(${index})">delete</button></td></tr>`
             })
-            let table = document.getElementById('table');
-            table.innerHTML = html + `<br>`;
+            let xx = JSON.stringify(nn);
+            let table = document.getElementById("table");
+            table.innerHTML = html;
+        }
+
+        function del(index) {
+            let ansh = localStorage.getItem('friut') || '[]';
+            let nn = JSON.parse(ansh);
+            let xx = nn.filter((data, dxt) => {
+                return index !== dxt
+            })
+
+            let str = JSON.stringify(xx);
+            localStorage.setItem('friut', str)
+            let cvb = localStorage.getItem('friut') || '[]';
+            let xxn = JSON.parse(cvb);
+            let html = '';
+            xxn.map((taskname, index) => {
+                html += `<tr><td>${index+1}</td><td>${taskname}</td><td><button onclick="del(${index})">delete</button></td></tr>`
+            })
+            let lol = JSON.stringify(xxn);
+            let table = document.getElementById("table");
+            table.innerHTML = html;
+
         }
     </script>
+
 </body>
 
 </html>

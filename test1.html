@@ -2,140 +2,163 @@
 <html lang="en">
 
 <head>
-    <style>
-        body {
-            background-color: rgb(137, 209, 253);
-        }
-        
-        .df {
-            display: flex;
-        }
-        
-        .text {
-            color: white;
-        }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+    <title>Enhanced Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e3f2fd;
+        }
+        
+        .container {
+            margin-top: 50px;
+        }
+        
+        .task-input {
+            max-width: 400px;
+        }
+        
+        .btn-space {
+            margin-left: 10px;
+        }
+        
+        .table-container {
+            margin-top: 30px;
+        }
+        
+        .empty-message {
+            text-align: center;
+            font-style: italic;
+            color: gray;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="d-flex">
-        <p class=" d-flex justify-content-center W-5 H-5 text">Welcome to my <br> Document</p>
-        <div class="d-flex  justify-content-center align-center gap-10" aria-hidden="true">
-            </i>
-            <div class="">
-                <label for="exampleFormControlInput1" class="form-label"></label>
-                <input id="n" type="email" class="form-control border-success" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class=" justify-content-between ">
+    <div class="container">
+        <h1 class="text-center mb-4">My Task Manager</h1>
 
-                <div class="d-flex mt-4 gap-1">
-                    <button class="form-control border-success bg-danger " class="bg-danger" onclick="add()">
-                    Add!!!
-                </button>
-                    <br>
-                    <button class="form-control border-success bg-success" class="bg-danger" onclick="get()">
-                    Get!!
-
-                </button>
-
-                    <button class="form-control border-success H-10 W-10 bg-red " class="bg-danger" onclick="del()">
-                    delete
-
-                </button>
-
-                </div>
-            </div>
+        <div class="d-flex flex-wrap align-items-center gap-2">
+            <input type="text" id="taskInput" class="form-control task-input" placeholder="Enter a task">
+            <button type="button" class="btn btn-primary" onclick="addTask()">
+                <i class="bi bi-plus-circle"></i> Add
+            </button>
+            <button type="button" class="btn btn-danger btn-space" onclick="deleteAll()">
+                <i class="bi bi-trash"></i> Delete All
+            </button>
         </div>
 
-        <table class="table W-100" id="list">
-
-        </table>
-        <div class="bg-danger container">100% wide until small breakpoint</div>
-        <div class="bg-danger container-md">100% wide until medium breakpoint</div>
-        <div class="bg-danger container-lg">100% wide until large breakpoint</div>
-        <div class="bg-danger container-xl">100% wide until extra large breakpoint</div>
-        <div class="bg-danger container-xxl">100% wide until extra extra large breakpoint</div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col bg-success">col</div>
-                <div class="col bg-danger">col</div>
-                <div class="col bg-info">col</div>
-                <div class="col bg-primary">col</div>
-                <div class="col bg-secondary">col</div>
-                <div class="col bg-warning">col</div>
-                <div class="col bg-dark">col</div>
-                <div class="col bg-light">col</div>
-                <div class="col bg-white">col</div>
-                <div class="col bg-transparent">col</div>
-                <div class="col bg-success">col</div>
-                <div class="col bg-danger">col</div>
-
-            </div>
+        <div class="table-container">
+            <table class="table table-striped table-hover mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Task</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="taskTable">
+                    <!-- Tasks will appear here -->
+                </tbody>
+            </table>
+            <p id="emptyMessage" class="empty-message">No tasks added yet.</p>
         </div>
-        <a class="W-100 H-100 color-primary" href="test1.html">blue background</a>
-        <script>
-            function add() {
-                let n = document.getElementById('n').value;
-                let oldfriut = JSON.parse(localStorage.getItem('friuts') || '[]');
-                oldfriut.push(n);
-                let nn = JSON.stringify(oldfriut);
-                let x = localStorage.setItem('friuts', nn);
-                let nnn = document.getElementById('n').value = '';
+    </div>
+
+    <script>
+        // Initialize tasks on page load
+        document.addEventListener("DOMContentLoaded", getTasks);
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const task = taskInput.value.trim();
+            if (!task) {
+                alert("Please enter a task.");
+                return;
             }
 
-            function get() {
-                let n = localStorage.getItem('friuts') || '[]';
-                let old = JSON.parse(n)
-                let html = '';
+            let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+            tasks.push(task);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            taskInput.value = "";
+            getTasks();
+        }
 
-                old.map((f, index) => {
-                    html += `<tbody><tr>
-                    <td id="list">${f}</th>
-                    <td id="list"><button class='btn btn-danger'  onclick='Delete(${index})'>DELETE</button></th>
-                </tr></tbody>`
-                })
-                let li = document.getElementById("list");
-                li.innerHTML = html
+        function getTasks() {
+            const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+            const taskTable = document.getElementById("taskTable");
+            const emptyMessage = document.getElementById("emptyMessage");
+
+            if (tasks.length === 0) {
+                taskTable.innerHTML = "";
+                emptyMessage.style.display = "block";
+                return;
+            } else {
+                emptyMessage.style.display = "none";
             }
 
-            function Delete(index) {
-                let n = localStorage.getItem('friuts') || '[]';
-                let lol = JSON.parse(n)
-                let o = lol.filter((friuts, dxt) => {
-                    return index !== dxt
-                })
-                let fer = JSON.stringify(o)
-                let free = localStorage.setItem('friuts', fer);
-                let html = `<tr>
-                    no data found.
-                </tr>`;
-                o.map((f, index) => {
-                    // html += `<td>${f}<button style='background-color:red;' onclick='Delete(${index})'>DELETE</button></td>`
-                    html += `<tbody><tr>
-                    <td id="list">${f}</th>
-                    <td id="list"><button class='btn btn-danger'onclick='Delete(${index})'>DELETE</button></th>
-                </tr></tbody>`
-                })
-                let li = document.getElementById("list");
-                li.innerHTML = html
-            }
+            taskTable.innerHTML = "";
+            tasks.forEach((task, index) => {
+                const row = document.createElement("tr");
 
-            function del() {
-                let n = localStorage.removeItem('friuts');
-            }
+                const snCell = document.createElement("td");
+                snCell.textContent = index + 1;
 
-            function edit() {
-                let lol = localStorage.getItem('friuts')
+                const taskCell = document.createElement("td");
+                taskCell.textContent = task;
+
+                const actionCell = document.createElement("td");
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "btn btn-sm btn-danger me-2";
+                deleteBtn.textContent = "Delete";
+                deleteBtn.onclick = () => deleteTask(index);
+
+                const editBtn = document.createElement("button");
+                editBtn.className = "btn btn-sm btn-warning";
+                editBtn.textContent = "Edit";
+                editBtn.onclick = () => editTask(index);
+
+                actionCell.appendChild(editBtn);
+                actionCell.appendChild(deleteBtn);
+
+                row.appendChild(snCell);
+                row.appendChild(taskCell);
+                row.appendChild(actionCell);
+
+                taskTable.appendChild(row);
+            });
+        }
+
+        function deleteTask(index) {
+            let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+            tasks.splice(index, 1);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            getTasks();
+        }
+
+        function deleteAll() {
+            if (confirm("Are you sure you want to delete all tasks?")) {
+                localStorage.removeItem("tasks");
+                getTasks();
             }
-        </script>
+        }
+
+        function editTask(index) {
+            let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+            const newTask = prompt("Edit task:", tasks[index]);
+            if (newTask !== null && newTask.trim() !== "") {
+                tasks[index] = newTask.trim();
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                getTasks();
+
+            }
+        }
+    </script>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </body>
 
 </html>
