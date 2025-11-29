@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculater</title>
 </head>
+
 <body>
     <input type="number" id="inp1" type="text">
     <select id="operator">
@@ -20,26 +22,24 @@
     <p id="As"></p>
     <script>
         function func() {
-                let a =document.getElementById("inp1").value
-                let b =document.getElementById("inp2").value
-                       let operator =document.getElementById("operator").value
-   if (operator == '+' ) {
-  document.getElementById('As').innerText=Number(a)+Number(a); 
-   }else if (operator == '-') {
-    document.getElementById('As').innerText=a-b; 
-   }
-     else if (operator == '*') {
-    document.getElementById('As').innerText=a*b; 
+            let a = document.getElementById("inp1").value
+            let b = document.getElementById("inp2").value
+            let operator = document.getElementById("operator").value
+            if (operator == '+') {
+                document.getElementById('As').innerText = Number(a) + Number(a);
+            } else if (operator == '-') {
+                document.getElementById('As').innerText = a - b;
+            } else if (operator == '*') {
+                document.getElementById('As').innerText = a * b;
 
-     }
-          else if (operator == '/') {
-                document.getElementById('As').innerText=a/b; 
-          }
+            } else if (operator == '/') {
+                document.getElementById('As').innerText = a / b;
+            }
 
-
-          
-}  
-   
+        }
     </script>
 </body>
+
+</html>
+
 </html>

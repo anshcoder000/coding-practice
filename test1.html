@@ -132,10 +132,12 @@
         }
 
         function deleteTask(index) {
-            let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-            tasks.splice(index, 1);
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            getTasks();
+            if (confirm("Are you sure you want to delete all tasks?")) {
+                let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+                tasks.splice(index, 1);
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                getTasks();
+            }
         }
 
         function deleteAll() {
